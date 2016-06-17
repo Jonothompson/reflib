@@ -11,9 +11,9 @@ from django.views.decorators.debug import sensitive_post_parameters
 
 
 class LibraryBaseView (FormView):
-    success_url = reverse_lazy('user_landing')
+    success_url = reverse_lazy('user_home')
     form_class = AuthenticationForm
-    redirect_field_name = REDIRECT_FIELD_NAME
+    # redirect_field_name = REDIRECT_FIELD_NAME
     template_name = 'library/home.html'
 
     @method_decorator(sensitive_post_parameters('password'))
@@ -26,6 +26,8 @@ class LibraryBaseView (FormView):
         return super(LibraryBaseView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        # self.object = form.save(commit=False)
+        # self.object.save()
         user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
         login(self.request, user)
         return HttpResponseRedirect(self.get_success_url())
