@@ -3,7 +3,30 @@
 {% block content %}
      <div class="container">
         <div class="row">
-            <h1>Reference Library</h1>
+            <div class="col-sm-10">
+                <h1>Reference Library</h1>
+                <h4>A personalized way to store and view your own picture library</h4>
+            </div>
+            <div class="col-sm-1 col-sm-offset-1">
+                <button>Sign in</button>
+            </div>
+        </div>
+        <div class="row">
+            <form method="post"> {% csrf_token %}
+                <table class="col-sm-6">
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                </table>
+
+                <input class="btn-primary" type="submit" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
         </div>
      </div>
 {% endblock content %}

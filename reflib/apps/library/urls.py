@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     url(r'^', views.LibraryBaseView.as_view(), name="library_home"),
+    url(r'^', views.UserLandingView.as_view(), name="user_home"),
 ]
