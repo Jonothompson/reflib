@@ -1,9 +1,9 @@
 {% load staticfiles %}<!DOCTYPE html>
 <html lang="en" ng-app>
-  <head>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="description" content="{% block description %}{% endblock %}" />
-    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+    <meta name="description" content="{% block description %}{% endblock %}"/>
+    <meta name="keywords" content="{% block keywords %}{% endblock %}"/>
     <meta name="viewport" content="{% block viewport %}width=device-width"{% endblock %}>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -14,35 +14,64 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
     <link rel="icon" type="image/gif" href="{% static 'img/favicon.gif' %}">
 
     {% block css %}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     {% endblock %}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+</head>
 
-  </head>
-
-  <body>
-    <div class="container">
-
-      {% block content %}
+<body>
+{% block nav %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img class="fuck-you-brand" src="{% static 'images/middle-finger.jpg' %}" alt="fuck-you"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Fuck Off</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+{% endblock nav %}
+<div class="container">
+    {% block content %}
         <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+    {% endblock content %}
+</div> <!-- /contaivbr -->
 
-    </div> <!-- /container -->
 
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-      <script src="{% static 'js/scripts.js' %}"></script>
-    {% endblock javascript %}
-  </body>
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+{% block javascript %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        $(window).scroll(function() {
+          if ($(document).scrollTop() > 50) {
+            $('nav').addClass('shrink');
+          } else {
+            $('nav').removeClass('shrink');
+          }
+        });
+    </script>
+{% endblock javascript %}
+</body>
 </html>

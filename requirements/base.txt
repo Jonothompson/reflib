@@ -8,3 +8,5 @@ psycopg2>=2.6.1,<2.7
 django-model-utils==2.3.1
 django-fontawesome==0.2.6
 django-bootstrap3==7.0.0
+django-authtools==1.5.0
+
