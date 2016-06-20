@@ -3,11 +3,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, CreateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
+
+from reflib.apps.users.models import User
 
 
 class LibraryBaseView (FormView):
@@ -31,6 +33,10 @@ class LibraryBaseView (FormView):
         user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
         login(self.request, user)
         return HttpResponseRedirect(self.get_success_url())
+
+
+class AccountCreate (CreateView):
+    model = User
 
 
 class UserLandingView (TemplateView):
