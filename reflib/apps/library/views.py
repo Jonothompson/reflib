@@ -42,13 +42,15 @@ class AccountCreate (CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
-        new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
+        new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
         login(self.request, new_user)
 
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
-        print('poop')
+        print('Please fill out the form correctly.')
+
+        return super(AccountCreate, self).form_invalid(form)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

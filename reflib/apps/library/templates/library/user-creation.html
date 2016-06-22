@@ -7,13 +7,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1>Create a user, then enjoy</h1>
-                <form action="post">{% csrf_token %}
-                    {% if form.errors %}
-                        {% for error in form.non_field_errors %}
-                            <div class="alert alert-danger" role="alert">{{ error }}</div>
-                        {% endfor %}
-                        <div class="alert alert-danger" role="alert">Please correct the errors below.</div>
-                    {% endif %}
+                {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">{{ error }}</div>
+                    {% endfor %}
+                    <div class="alert alert-danger" role="alert">Please correct the errors below.</div>
+                {% endif %}
+                <form method="post">{% csrf_token %}
                     {% bootstrap_form form %}
                     <button type="submit" class="btn btn-primary">
                         Submit {% bootstrap_icon "glyphicon glyphicon-ok" %}
