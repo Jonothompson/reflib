@@ -1,9 +1,6 @@
 import os
 import sys
 
-# AUTH_USER settings
-AUTH_USER_MODEL = 'users.User'
-
 # PATH vars
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,9 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'authtools',
+    'bootstrap3',
 
     'library',
-    'users',
+
 ]
 
 PROJECT_APPS = []
