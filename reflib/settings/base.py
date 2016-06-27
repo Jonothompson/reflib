@@ -1,6 +1,9 @@
 import os
 import sys
 
+# custom user model
+AUTH_USER_MODEL = 'authtools.User'
+
 # PATH vars
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,6 +25,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
+    'reflib.apps.library',
+    'reflib.apps.customuser',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,8 +37,6 @@ INSTALLED_APPS = [
 
     'authtools',
     'bootstrap3',
-
-    'library',
 
 ]
 
@@ -143,3 +147,4 @@ except ImportError:
 # importing test settings file if necessary
 if IN_TESTING:
     from .testing import *  # noqa
+

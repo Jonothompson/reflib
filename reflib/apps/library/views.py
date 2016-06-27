@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from reflib.apps.customuser.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
@@ -9,7 +10,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
-from forms import UserCreateForm
+from reflib.apps.library.forms import UserCreateForm
 
 
 class LibraryBaseView (FormView):
@@ -40,17 +41,15 @@ class AccountCreate (CreateView):
     form_class = UserCreateForm
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+        print(1)
+        self.object = form.save()
+        print(2)
+        new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
+        print(3)
         login(self.request, new_user)
+        print(4)
 
         return HttpResponseRedirect(self.get_success_url())
-
-    def form_invalid(self, form):
-        print('Please fill out the form correctly.')
-
-        return super(AccountCreate, self).form_invalid(form)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
