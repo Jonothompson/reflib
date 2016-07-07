@@ -1,5 +1,3 @@
-# from django.contrib.auth.models import User
-from reflib.apps.customuser.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
@@ -35,27 +33,17 @@ class LibraryBaseView (FormView):
 
 
 class AccountCreate (CreateView):
-    model = User
     success_url = reverse_lazy('user_home')
     template_name = 'library/user-creation.html'
     form_class = UserCreateForm
 
     def form_valid(self, form):
-        print(1)
         self.object = form.save()
-        print(2)
-        new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
-        print(3)
-        login(self.request, new_user)
+        create_new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
+        login(self.request, create_new_user)
         print(4)
 
         return HttpResponseRedirect(self.get_success_url())
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if email:
-            email = email.lower()
-        return email
 
 
 class UserLandingView (TemplateView):

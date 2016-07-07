@@ -26,7 +26,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     'reflib.apps.library',
-    'reflib.apps.customuser',
+    # 'reflib.apps.customuser',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
 
     'authtools',
     'bootstrap3',
+    'imagestore',
+    'sorl.thumbnail',
+    'tagging',
 
 ]
 

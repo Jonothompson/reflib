@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^adpip min/', admin.site.urls),
     url(r'^', include('library.urls')),
     url(r'^', include('customuser.urls')),
+    url(r'^gallery/', include('imagestore.urls', namespace='imagestore')),
 ]

@@ -1,11 +1,17 @@
-import authtools
+from authtools.forms import UserCreationForm
 from django import forms
-from reflib.apps.customuser.models import User
+from authtools.models import User
 
 
-class UserCreateForm(authtools.forms.UserCreationForm):
+class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ("email", "password1", "password2")
+        fields = ("name", "email", "password1", "password2")
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            email = email.lower()
+        return email
