@@ -2,13 +2,16 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView, TemplateView, CreateView
+from django.shortcuts import get_object_or_404
+from django.views.generic import FormView, TemplateView, CreateView, ListView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
 from reflib.apps.library.forms import UserCreateForm
+
+from imagestore.models import Album
 
 
 class LibraryBaseView (FormView):
@@ -41,10 +44,18 @@ class AccountCreate (CreateView):
         self.object = form.save()
         create_new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
         login(self.request, create_new_user)
-        print(4)
-
         return HttpResponseRedirect(self.get_success_url())
 
 
-class UserLandingView (TemplateView):
+class UserLandingView (ListView):
     template_name = 'library/user-landing.html'
+    model = Album
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     album = get_object_or_404(Album)
+    #     print(album)
+    #
+    #     return super(UserLandingView, self).dispatch(request, *args, **kwargs)
+
+
+

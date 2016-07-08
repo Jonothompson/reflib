@@ -4,8 +4,13 @@ import sys
 # custom user model
 AUTH_USER_MODEL = 'authtools.User'
 
-# PATH vars
+# Custom path for user uploaded files
+MEDIA_ROOT = 'imagestore/static/imagestore.css'
 
+# Imagestore Settings
+
+
+# PATH vars
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 root = lambda *x: os.path.join(BASE_DIR, *x)
 

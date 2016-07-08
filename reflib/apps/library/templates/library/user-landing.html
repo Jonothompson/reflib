@@ -3,9 +3,26 @@
 {% block content %}
      <div class="container">
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-8">
                 <h2>Welcome {{ user.name }}</h2>
             </div>
+            <div class="col-sm-2">
+                <a href="{% url 'imagestore:upload' %}"><button>Upload Picture</button></a>
+            </div>
+           <div class="col-sm-2">
+                <a href="{% url 'imagestore:create-album' %}"><button>Create Album</button></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Albums:</h3>
+            </div>
+            {% for album in album_list %}
+                <div class="col-sm-2 album-container container-shadow">
+                    <a class="album-link" href="{% url 'imagestore:album' album_id=album.id %}">{{ album.name }}</a>
+                    <p class="album-brief">{{ album.brief }}</p>
+                </div>
+            {% endfor %}
         </div>
      </div>
 {% endblock content %}
